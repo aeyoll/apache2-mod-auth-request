@@ -65,8 +65,8 @@ sudo systemctl restart apache2
 
 ### AuthRequest
 
-**Syntax:** `AuthRequest uri|off`
-**Context:** server config, virtual host, directory, location
+- **Syntax:** `AuthRequest uri|off`
+- **Context:** server config, virtual host, directory, location
 
 The local URI the authorization subrequest is sent to. It must start with `/`
 and it must resolve to something that answers, in practice a location with a
@@ -74,8 +74,8 @@ and it must resolve to something that answers, in practice a location with a
 
 ### AuthRequestRedirect
 
-**Syntax:** `AuthRequestRedirect url|off`
-**Context:** server config, virtual host, directory, location
+- **Syntax:** `AuthRequestRedirect url|off`
+- **Context:** server config, virtual host, directory, location
 
 When the auth backend answers 401, redirect the client here with a 302 instead
 of returning the 401. This is nginx's `error_page 401 = @portal; return 302`.
