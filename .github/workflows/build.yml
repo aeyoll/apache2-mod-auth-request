@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: sudo apt-get update && sudo apt-get install -y apache2-dev
+      - run: make
+      - uses: actions/upload-artifact@v7
+        with:
+          name: mod_auth_request.so
+          path: .libs/mod_auth_request.so
+          if-no-files-found: error
+      - if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "${{ github.ref_name }}" --generate-notes
